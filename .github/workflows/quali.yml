@@ -37,8 +37,8 @@ on:
         default: "qa01"
         description: "Use an existing cloud controller, e.g. like qa01 instead of dynamic one"
       tests_release:
-        required: false
-        default: ""
+        required: true
+        default: "release/v2.8.0"
         description: "Tests release branch to use (i.e. 'release/v2.8.0' or 'master'). If left empty, latest release branch is used"
 
   schedule:
@@ -59,6 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          ref: ${{ github.event.inputs.tests_release }}
           fetch-depth: 0
 
       - name: set variables
